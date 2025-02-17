@@ -6,14 +6,20 @@ export default function Hero() {
   const [text, setText] = useState("")
   const [isTyping, setIsTyping] = useState(true)
 
-  const fullText = "const skills = ['JavaScript', 'React', 'Node.js', 'Python', 'SQL', 'AWS'];"
+  const fullText =
+    `  const developer = {
+      name: "Constantino Abba",
+      role: "Full-Stack",
+      passion: ["JavaScript", "UX/UI", "Automation"],
+    };`
+    ;
 
   useEffect(() => {
     if (isTyping) {
       if (text.length < fullText.length) {
         const timeout = setTimeout(() => {
           setText(fullText.slice(0, text.length + 1))
-        }, 100)
+        }, 50)
         return () => clearTimeout(timeout)
       } else {
         setIsTyping(false)
@@ -56,7 +62,7 @@ export default function Hero() {
             <div className="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
             <div className="w-3 h-3 rounded-full bg-green-500"></div>
           </div>
-          <div className="font-mono text-gray-800 dark:text-gray-200 text-sm sm:text-base break-words">
+          <div className="font-mono text-gray-800 dark:text-gray-200 text-sm sm:text-base break-words whitespace-pre-wrap">
             <span className="text-green-600 dark:text-green-400">$ </span>
             {text}
             <span

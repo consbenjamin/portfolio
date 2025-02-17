@@ -1,4 +1,6 @@
 import Image from "next/image"
+import { ExternalLink } from 'lucide-react';
+import vapeclub from "../images/vapeclub.png"
 
 const projects = [
   {
@@ -7,18 +9,21 @@ const projects = [
       "A full-stack e-commerce solution with user authentication, product management, and payment integration.",
     image: "/placeholder.svg?height=300&width=400",
     technologies: ["React", "Node.js", "Express", "MongoDB", "Stripe"],
+    url: "#"
   },
   {
-    title: "Task Management App",
-    description: "A collaborative task management tool with real-time updates and team features.",
-    image: "/placeholder.svg?height=300&width=400",
-    technologies: ["Next.js", "GraphQL", "PostgreSQL", "WebSockets"],
+    title: "Vape Club E-Commerce",
+    description: "E-commerce focused on facilitating the sale and purchase of vapes, with user authentication and integration with MercadoPago payment gateway.",
+    image: vapeclub,
+    technologies: ["Next.js", "Tailwind CSS", "Node.js", "Express", "MongoDB", "NextAuth", "MercadoPago"],
+    url: "https://vapeclub.vercel.app/"
   },
   {
     title: "Weather Dashboard",
     description: "An interactive weather dashboard with location-based forecasts and historical data visualization.",
     image: "/placeholder.svg?height=300&width=400",
     technologies: ["React", "D3.js", "Node.js", "OpenWeatherMap API"],
+    url: "#"
   },
 ]
 
@@ -31,7 +36,7 @@ export default function Projects() {
           {projects.map((project, index) => (
             <div
               key={index}
-              className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105"
+              className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105 flex flex-col h-full"
             >
               <Image
                 src={project.image || "/placeholder.svg"}
@@ -40,10 +45,10 @@ export default function Projects() {
                 height={300}
                 className="w-full h-48 object-cover"
               />
-              <div className="p-6">
+              <div className="p-6 flex flex-col flex-grow">
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{project.title}</h3>
-                <p className="text-gray-700 dark:text-gray-300 mb-4">{project.description}</p>
-                <div className="flex flex-wrap gap-2">
+                <p className="text-gray-700 dark:text-gray-300 flex-grow">{project.description}</p>
+                <div className="flex flex-wrap gap-2 my-4">
                   {project.technologies.map((tech, techIndex) => (
                     <span
                       key={techIndex}
@@ -53,6 +58,16 @@ export default function Projects() {
                     </span>
                   ))}
                 </div>
+                {project.url && (
+                  <a
+                    href={project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded mt-auto"
+                  >
+                    <ExternalLink />
+                  </a>
+                )}
               </div>
             </div>
           ))}
@@ -61,4 +76,3 @@ export default function Projects() {
     </section>
   )
 }
-

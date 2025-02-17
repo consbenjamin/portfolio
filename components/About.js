@@ -5,13 +5,13 @@ export default function About() {
     "JavaScript",
     "React",
     "Next.js",
+    "TailwindCss",
+    "Zustand",
     "Node.js",
     "Express",
     "MongoDB",
     "PostgreSQL",
-    "GraphQL",
-    "Docker",
-    "AWS",
+    "Supabase",
     "Git",
   ]
 
@@ -22,12 +22,11 @@ export default function About() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
             <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
-              I'm a passionate full-stack developer with a keen eye for creating elegant, efficient, and user-friendly
-              solutions. With a strong foundation in both front-end and back-end technologies, I bring ideas to life by
-              crafting robust and scalable applications.
+              My name is Constantino Abba, i'm a passionate Full Stack Developer with training as a web developer. Experience working with NodeJS, React, Zustand, NextJs, and other technologies in the sector. 
+              I have a great ability to adapt and I'm always looking for new challenges and learning new technologies to continue growing. 
             </p>
             <p className="text-lg text-gray-700 dark:text-gray-300">
-              My goal is to continue learning and growing in this ever-evolving field, tackling new challenges and
+              With a creative mindset, communication skills, and autonomy. My goal is to continue learning and growing in this ever-evolving field,
               contributing to innovative projects that make a difference.
             </p>
           </div>

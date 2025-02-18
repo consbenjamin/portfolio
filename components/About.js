@@ -22,7 +22,7 @@ export default function About() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
             <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
-              My name is Constantino Abba, i'm a passionate Full Stack Developer with training as a web developer. Experience working with NodeJS, React, Zustand, NextJs, and other technologies in the sector. 
+              My name is Constantino Abba, i'm a Full Stack Developer from Argentina. I have experience working with NodeJS, React, Zustand, NextJs, and other technologies in the sector. 
               I have a great ability to adapt and I'm always looking for new challenges and learning new technologies to continue growing. 
             </p>
             <p className="text-lg text-gray-700 dark:text-gray-300">

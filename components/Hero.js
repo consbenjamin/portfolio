@@ -6,20 +6,18 @@ export default function Hero() {
   const [text, setText] = useState("")
   const [isTyping, setIsTyping] = useState(true)
 
-  const fullText =
-    `  const developer = {
+  const fullText = `  const developer = {
       name: "Constantino Abba",
-      role: "Full-Stack",
+      role: "Full-Stack Developer",
       passion: ["JavaScript", "UX/UI", "Automation"],
     };`
-    ;
 
   useEffect(() => {
     if (isTyping) {
       if (text.length < fullText.length) {
         const timeout = setTimeout(() => {
           setText(fullText.slice(0, text.length + 1))
-        }, 50)
+        }, 25)
         return () => clearTimeout(timeout)
       } else {
         setIsTyping(false)
@@ -79,10 +77,11 @@ export default function Hero() {
             View Projects
           </a>
           <a
-            href="#contact"
+            href="/constantino_abba_cv_english.pdf"
+            download="Constantino-Abba-CV.pdf"
             className="w-full sm:w-auto bg-transparent border-2 border-indigo-600 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400 px-6 py-3 rounded-full text-lg font-semibold hover:bg-indigo-600 hover:text-white dark:hover:bg-indigo-400 dark:hover:text-gray-900 transition duration-300"
           >
-            Contact Me
+            Download CV
           </a>
         </div>
       </div>

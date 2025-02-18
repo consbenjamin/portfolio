@@ -1,6 +1,8 @@
 import Image from "next/image"
 import { ExternalLink } from 'lucide-react';
 import vapeclub from "../images/vapeclub.png"
+import chatapp from "../images/chat-app.png"
+import dolaractual from "../images/dolar-actual.png"
 
 const projects = [
   {
@@ -9,21 +11,32 @@ const projects = [
       "A full-stack e-commerce solution with user authentication, product management, and payment integration.",
     image: "/placeholder.svg?height=300&width=400",
     technologies: ["React", "Node.js", "Express", "MongoDB", "Stripe"],
-    url: "#"
+    url: "#",
+    status: "development",
   },
   {
     title: "Vape Club E-Commerce",
     description: "E-commerce focused on facilitating the sale and purchase of vapes, with user authentication and integration with MercadoPago payment gateway.",
     image: vapeclub,
     technologies: ["Next.js", "Tailwind CSS", "Node.js", "Express", "MongoDB", "NextAuth", "MercadoPago"],
-    url: "https://vapeclub.vercel.app/"
+    url: "https://vapeclub.vercel.app/",
+    status: "online", 
   },
   {
-    title: "Weather Dashboard",
-    description: "An interactive weather dashboard with location-based forecasts and historical data visualization.",
-    image: "/placeholder.svg?height=300&width=400",
-    technologies: ["React", "D3.js", "Node.js", "OpenWeatherMap API"],
-    url: "#"
+    title: "Chat-App",
+    description: "A real-time chat system with secure authentication and modern features, developed with modern web technologies.",
+    image: chatapp,
+    technologies: ["Next.js", "Tailwind CSS", "Node.js", "Express", "MongoDB", "NextAuth", "Zustand", "Socket.io"],
+    url: "https://chat-online-app.vercel.app/",
+    status: "online",  
+  },
+  {
+    title: "Dolar-Actual",
+    description: "Website to see the current dollar rate in Argentina and its historical rate using an external API",
+    image: dolaractual,
+    technologies: ["Next.js", "Tailwind CSS", "Charts", "External API"],
+    url: "https://dolar-actual.vercel.app/",
+    status: "online",  
   },
 ]
 
@@ -31,7 +44,7 @@ export default function Projects() {
   return (
     <section id="projects" className="py-20 bg-gray-100 dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white text-center mb-12">Featured Projects</h2>
+        <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white text-center mb-12">Projects</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <div
@@ -58,6 +71,14 @@ export default function Projects() {
                     </span>
                   ))}
                 </div>
+
+                <div className="flex items-center gap-2 mb-4">
+                  <span className={`w-3 h-3 rounded-full ${project.status === 'online' ? 'bg-green-500' : project.status === 'development' ? 'bg-yellow-500' : 'bg-red-500'}`}></span>
+                  <span className="text-sm text-gray-700 dark:text-gray-300">
+                    {project.status === 'online' ? 'Deployed' : project.status === 'development' ? 'In Development' : 'Offline'}
+                  </span>
+                </div>
+
                 {project.url && (
                   <a
                     href={project.url}

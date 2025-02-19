@@ -1,0 +1,39 @@
+{
+  "about": {
+    "title": "About Me",
+    "description1": "My name is Constantino Abba, I'm a Full Stack Developer from Argentina. I have experience working with NodeJS, React, Zustand, NextJs, and other technologies in the sector. I have a great ability to adapt and I'm always looking for new challenges and learning new technologies to continue growing.",
+    "description2": "With a creative mindset, communication skills, and autonomy, my goal is to continue learning and growing in this ever-evolving field, contributing to innovative projects that make a difference.",
+    "skillsTitle": "Skills"
+  },
+  "hero": {
+    "title": "Full-Stack Developer",
+    "subtitle": "Turning complex problems into elegant solutions",
+    "viewProjects": "View Projects",
+    "downloadCV": "Download CV"
+  },
+  "navbar": {
+    "brand": "Constantino Dev",
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "contact": "Contact",
+    "openMenu": "Open main menu",
+    "closeMenu": "Close main menu"
+  },
+  "projects": {
+    "title": "Projects",
+    "description1": "E-commerce focused on facilitating the sale and purchase of vapes, with user authentication and integration with MercadoPago payment gateway.",
+    "description2": "A real-time chat system with secure authentication and modern features, developed with modern web technologies.",
+    "description3": "Website to see the current dollar rate in Argentina and its historical rate using an external API"
+  },
+  "carousel": {
+    "title": "Skills"
+  },
+  "contact": {
+    "title": "Get in Touch",
+    "description": "Feel free to reach out for collaborations, projects, or just to say hi."
+  }
+}
+
+
+

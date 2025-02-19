@@ -1,35 +1,35 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
 
-export default function Hero() {
-  const [text, setText] = useState("")
-  const [isTyping, setIsTyping] = useState(true)
+export default function Hero({ t, locale }) {
+  const [text, setText] = useState("");
+  const [isTyping, setIsTyping] = useState(true);
+  const [hasTyped, setHasTyped] = useState(false);
 
   const fullText = `  const developer = {
       name: "Constantino Abba",
       role: "Full-Stack Developer",
       passion: ["JavaScript", "UX/UI", "Automation"],
-    };`
+    };`;
 
   useEffect(() => {
-    if (isTyping) {
-      if (text.length < fullText.length) {
-        const timeout = setTimeout(() => {
-          setText(fullText.slice(0, text.length + 1))
-        }, 25)
-        return () => clearTimeout(timeout)
-      } else {
-        setIsTyping(false)
+    if (!hasTyped) { 
+      if (isTyping) {
+        if (text.length < fullText.length) {
+          const timeout = setTimeout(() => {
+            setText(fullText.slice(0, text.length + 1));
+          }, 25);
+          return () => clearTimeout(timeout);
+        } else {
+          setIsTyping(false);
+          setHasTyped(true);
+        }
       }
-    } else {
-      const timeout = setTimeout(() => {
-        setIsTyping(true)
-        setText("")
-      }, 3000)
-      return () => clearTimeout(timeout)
     }
-  }, [text, isTyping])
+  }, [text, isTyping, hasTyped]);
+
+  const cvLink = locale === 'es' ? '/constantino_abba_cv_es.pdf' : '/constantino_abba_cv_en.pdf';
 
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white overflow-hidden px-4">
@@ -47,9 +47,11 @@ export default function Hero() {
 
       <div className="z-10 text-center max-w-3xl w-full">
         <div className="mb-8">
-          <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4">Full-Stack Developer</h1>
+          <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4">
+            {t.title}
+          </h1>
           <p className="text-lg sm:text-xl md:text-2xl text-gray-700 dark:text-gray-300">
-            Turning complex problems into elegant solutions
+            {t.subtitle}
           </p>
         </div>
 
@@ -64,27 +66,28 @@ export default function Hero() {
             <span className="text-green-600 dark:text-green-400">$ </span>
             {text}
             <span
-              className={`inline-block w-2 h-5 ml-1 bg-gray-800 dark:bg-gray-200 ${isTyping ? "animate-pulse" : ""}`}
-            ></span>
+              className={`inline-block w-2 h-5 ml-1 bg-gray-800 dark:bg-gray-200 ${
+                isTyping ? "animate-pulse" : ""
+              }`}></span>
           </div>
         </div>
 
         <div className="mt-8 flex flex-col sm:flex-row justify-center items-center gap-4">
           <a
             href="#projects"
-            className="w-full sm:w-auto bg-indigo-600 text-white px-6 py-3 rounded-full text-lg font-semibold hover:bg-indigo-700 transition duration-300"
+            className="w-full sm:w-auto bg-indigo-600 text-white px-6 py-3 text-lg font-semibold hover:bg-indigo-700 transition duration-300"
           >
-            View Projects
+            {t.viewProjects}
           </a>
           <a
-            href="/constantino_abba_cv_english.pdf"
+            href={cvLink}
             download="Constantino-Abba-CV.pdf"
-            className="w-full sm:w-auto bg-transparent border-2 border-indigo-600 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400 px-6 py-3 rounded-full text-lg font-semibold hover:bg-indigo-600 hover:text-white dark:hover:bg-indigo-400 dark:hover:text-gray-900 transition duration-300"
+            className="w-full sm:w-auto bg-transparent border-2 border-indigo-600 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400 px-6 py-3 text-lg font-semibold hover:bg-indigo-600 hover:text-white dark:hover:bg-indigo-400 dark:hover:text-gray-900 transition duration-300"
           >
-            Download CV
+            {t.downloadCV}
           </a>
         </div>
       </div>
     </section>
-  )
+  );
 }

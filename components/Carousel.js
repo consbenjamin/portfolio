@@ -9,14 +9,14 @@ const skills = [
   { name: "JavaScript", color: "text-[#F7DF1E]", icon: "/js.svg?height=64&width=64" },
   { name: "Node", color: "text-[#6AA84F]", icon: "/node.svg?height=64&width=64" },
   { name: "React", color: "text-[#61DAFB]", icon: "/react.svg?height=64&width=64" },
-  { name: "Next.js", color: "text-white", icon: "/nextjs.svg?height=64&width=64" },
+  { name: "Next.js", color: "dark:text-white text-gray-800", icon: "/nextjs.svg?height=64&width=64" },
   { name: "Tailwind", color: "text-[#38BDF8]", icon: "/tailwind.svg?height=64&width=64" },
   { name: "MongoDB", color: "text-[#47A248]", icon: "/mongodb.svg?height=64&width=64" },
   { name: "PostgreSQL", color: "text-[#3D85C6]", icon: "/pgsql.svg?height=64&width=64" },
   { name: "Zustand", color: "text-[#660000]", icon: "/zustand.svg?height=64&width=64" },
 ]
 
-export default function Carousel() {
+export default function Carousel({ t }) {
   const containerRef = useRef(null)
   const [scrollPosition, setScrollPosition] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
@@ -60,7 +60,7 @@ export default function Carousel() {
   return (
     <div className="w-full bg-gray-100 dark:bg-[#0A0B14] py-12">
       <h2 className="text-center text-3xl font-bold text-gray-900 dark:text-white mb-8">
-        SKILLS
+        {t.title}
       </h2>
       <div
         ref={containerRef}

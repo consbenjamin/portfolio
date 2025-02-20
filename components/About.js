@@ -9,7 +9,6 @@ export default function About({ t }) {
     "Express",
     "MongoDB",
     "PostgreSQL",
-    "Supabase",
     "Git"
   ];
 

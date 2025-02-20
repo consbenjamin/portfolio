@@ -23,7 +23,7 @@
   "projects": {
     "title": "Proyectos",
     "description1": "E-commerce enfocado en facilitar la venta y compra de vapes, con autenticación de usuarios e integración con el gateway de pagos MercadoPago.",
-    "description2": "Un sistema de chat en tiempo real con autenticación segura y características modernas, desarrollado con tecnologías web modernas.",
+    "description2": "Un sistema de chat en tiempo real con autenticación segura, desarrollado con tecnologías web modernas.",
     "description3": "Sitio web para ver el tipo de cambio actual del dólar en Argentina y su historial utilizando una API externa"
   },
   "carousel": {

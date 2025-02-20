@@ -6,7 +6,7 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
-  transition: background-color 0.3s ease, color 0.3s ease; /* Suaviza la transición del color */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -17,7 +17,6 @@
   }
 }
 
-/* Asegura que el <html> tenga transición suave para el cambio de tema */
 html[data-theme='dark'] {
   --foreground-rgb: 255, 255, 255;
   --background-start-rgb: 0, 0, 0;

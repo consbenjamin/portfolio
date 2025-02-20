@@ -23,7 +23,7 @@
   "projects": {
     "title": "Projects",
     "description1": "E-commerce focused on facilitating the sale and purchase of vapes, with user authentication and integration with MercadoPago payment gateway.",
-    "description2": "A real-time chat system with secure authentication and modern features, developed with modern web technologies.",
+    "description2": "A real-time chat system with secure authentication, developed with modern web technologies.",
     "description3": "Website to see the current dollar rate in Argentina and its historical rate using an external API"
   },
   "carousel": {

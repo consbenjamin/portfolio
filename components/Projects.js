@@ -30,8 +30,8 @@ const projects = [
   {
     title: "Chat-App",
     descriptions: {
-      en: "A real-time chat system with secure authentication and modern features, developed with modern web technologies.",
-      es: "Un sistema de chat en tiempo real con autenticación segura y características modernas, desarrollado con tecnologías web modernas.",
+      en: "A real-time chat system with secure authentication, developed with modern web technologies.",
+      es: "Un sistema de chat en tiempo real con autenticación segura, desarrollado con tecnologías web modernas.",
     },
     image: chatapp,
     technologies: ["Next.js", "Tailwind CSS", "Node.js", "Express", "MongoDB", "NextAuth", "Zustand", "Socket.io"],

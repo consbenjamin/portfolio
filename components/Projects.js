@@ -3,19 +3,20 @@ import { ExternalLink } from 'lucide-react';
 import vapeclub from "../images/vapeclub.png";
 import chatapp from "../images/chat-app.png";
 import dolaractual from "../images/dolar-actual.png";
+import hassuru from "../images/hassuru.png";
 
 const projects = [
-  // {
-  //   title: "E-commerce hASSU",
-  //   descriptions: {
-  //     en: "A full-stack e-commerce solution with user authentication, product management, and payment integration.",
-  //     es: "Una solución de comercio electrónico full-stack con autenticación de usuarios, gestión de productos e integración con pasarela de pago.",
-  //   },
-  //   image: "/placeholder.svg?height=300&width=400",
-  //   technologies: ["React", "Node.js", "Express", "MongoDB", "Stripe"],
-  //   url: "#",
-  //   status: "development",
-  // },
+  {
+    title: "Hassuru.ar",
+    descriptions: {
+      en: "Full-stack E-commerce of clothing developed collaboratively with admin dashboard.",
+      es: "Full-stack E-commerce de Ropa desarrollado de manera conjunta con dashboard de administración.",
+    },
+    image: hassuru,
+    technologies: ["Next.js", "Tailwind CSS", "Node.js", "Zustand", "Cloudinary", "Express", "MongoDB"],
+    url: "https://www.hassuru.ar/",
+    status: "online",
+  },
   {
     title: "Vape Club E-Commerce",
     descriptions: {

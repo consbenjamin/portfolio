@@ -9,8 +9,8 @@ const projects = [
   {
     title: "Hassuru.ar",
     descriptions: {
-      en: "Full-stack E-commerce of clothing developed collaboratively with admin dashboard.",
-      es: "Full-stack E-commerce de Ropa desarrollado de manera conjunta con dashboard de administración.",
+      en: "Full-stack E-commerce of clothing developed collaboratively for a client with admin dashboard.",
+      es: "Full-stack E-commerce de Ropa desarrollado de manera conjunta para un cliente con dashboard de administración.",
     },
     image: hassuru,
     technologies: ["Next.js", "Tailwind CSS", "Node.js", "Zustand", "Cloudinary", "Express", "MongoDB"],

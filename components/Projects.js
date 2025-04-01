@@ -4,7 +4,7 @@ import vapeclub from "../images/vapeclub.png";
 import chatapp from "../images/chat-app.png";
 import dolaractual from "../images/dolar-actual.png";
 import hassuru from "../images/hassuru.png";
-import linkbrief from "../images/linkbrief.png";
+import linkbrief from "../images/LinkBrief.png";
 
 const projects = [
   {

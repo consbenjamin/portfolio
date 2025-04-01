@@ -4,6 +4,7 @@ import vapeclub from "../images/vapeclub.png";
 import chatapp from "../images/chat-app.png";
 import dolaractual from "../images/dolar-actual.png";
 import hassuru from "../images/hassuru.png";
+import linkbrief from "../images/linkbrief.png";
 
 const projects = [
   {
@@ -48,6 +49,17 @@ const projects = [
     image: dolaractual,
     technologies: ["Next.js", "Tailwind CSS", "Charts", "External API"],
     url: "https://dolar-actual.vercel.app/",
+    status: "online",  
+  },
+  {
+    title: "LinkBrief URL-Shortener",
+    descriptions: {
+      en: "A URL shortener that allows users to create shortened links with analytics to track clicks and traffic sources.",
+      es: "Un acortador de URLs que permite a los usuarios crear enlaces cortos con analíticas para rastrear clics y fuentes de tráfico.",
+    },
+    image: linkbrief,
+    technologies: ["Next.js", "Tailwind CSS", "Supabase"],
+    url: "https://linkbrief.vercel.app/",
     status: "online",  
   },
 ];

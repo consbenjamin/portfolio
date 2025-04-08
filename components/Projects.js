@@ -47,8 +47,8 @@ const projects = [
       es: "Sitio web para ver el tipo de cambio actual del dólar en Argentina y su tasa histórica usando una API externa.",
     },
     image: dolaractual,
-    technologies: ["Next.js", "Tailwind CSS", "Charts", "External API"],
-    url: "https://dolar-actual.vercel.app/",
+    technologies: ["Next.js", "Tailwind CSS", "ReCharts", "External API"],
+    url: "https://dolar-actual-argentina.vercel.app/",
     status: "online",  
   },
   {

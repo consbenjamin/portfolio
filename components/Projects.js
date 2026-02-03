@@ -73,7 +73,7 @@ const projects = [
       es: "Panel inteligente para controlar suscripciones recurrentes, anticipar los próximos cobros y recibir avisos para que nada se renueve sin control.",
     },
     image: subghost,
-    technologies: ["Next.js", "Tailwind CSS", "Supabase"],
+    technologies: ["Next.js", "Tailwind CSS", "Supabase, PWA"],
     url: "https://subghost.vercel.app/",
     status: "online",  
   }

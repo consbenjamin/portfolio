@@ -8,6 +8,7 @@ import chatapp from "../images/chat-app.png";
 import dolaractual from "../images/dolar-actual.png";
 import hassuru from "../images/hassuru.png";
 import linkbrief from "../images/LinkBrief.png";
+import subghost from "../images/subghost.png";
 
 const projects = [
   {
@@ -65,6 +66,17 @@ const projects = [
     url: "https://linkbrief.vercel.app/",
     status: "online",  
   },
+  {
+    title: "SubGhost - Detector de Suscripciones",
+    descriptions: {
+      en: "Smart dashboard to monitor recurring subscriptions, forecast upcoming charges, and receive reminders so nothing renews unnoticed.",
+      es: "Panel inteligente para controlar suscripciones recurrentes, anticipar los próximos cobros y recibir avisos para que nada se renueve sin control.",
+    },
+    image: subghost,
+    technologies: ["Next.js", "Tailwind CSS", "Supabase"],
+    url: "https://subghost.vercel.app/",
+    status: "online",  
+  }
 ];
 
 export default function Projects({ t, locale }) {

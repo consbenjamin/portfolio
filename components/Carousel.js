@@ -58,8 +58,8 @@ export default function Carousel({ t }) {
   }, [scrollPosition])
 
   return (
-    <div className="w-full bg-gray-100 dark:bg-[#0A0B14] py-12">
-      <h2 className="text-center text-3xl font-bold text-gray-900 dark:text-white mb-8">
+    <div className="w-full bg-slate-50 dark:bg-slate-900/50 py-16 border-y border-slate-200/50 dark:border-slate-800/50">
+      <h2 className="text-center text-3xl font-bold text-slate-900 dark:text-white mb-10">
         {t.title}
       </h2>
       <div
@@ -71,7 +71,7 @@ export default function Carousel({ t }) {
         {[...skills, ...skills].map((skill, index) => (
           <div
             key={index}
-            className="flex-none w-[200px] bg-white dark:bg-[#0F1119] p-6 rounded-lg flex flex-col items-center justify-center gap-4 h-[200px] shadow-md dark:shadow-lg"
+            className="flex-none w-[200px] bg-white dark:bg-slate-800/80 p-6 rounded-xl flex flex-col items-center justify-center gap-4 h-[200px] shadow-md dark:shadow-slate-900/50 border border-slate-200/50 dark:border-slate-700/50"
           >
             <div className="w-16 h-16 flex items-center justify-center">
               <Image

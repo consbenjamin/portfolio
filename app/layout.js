@@ -14,9 +14,21 @@ export const metadata = {
   icons: "/favicon.svg",
 };
 
+const themeScript = `
+  (function() {
+    const stored = localStorage.getItem('darkMode');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const isDark = stored !== null ? stored === 'true' : prefersDark;
+    document.documentElement.classList.toggle('dark', isDark);
+  })();
+`;
+
 export default function RootLayout({ children }) {
   return (
-    <html lang="es" className={inter.variable}>
+    <html lang="es" className={inter.variable} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className="font-sans antialiased">
         {children}
         <Analytics />

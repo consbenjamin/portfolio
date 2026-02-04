@@ -31,11 +31,11 @@ export default function Contact({ t }) {
     <section
       id="contact"
       ref={sectionRef}
-      className={`reveal bg-slate-900 dark:bg-slate-950 text-slate-200 py-20 px-6 ${visible ? "reveal-visible" : ""}`}
+      className={`reveal bg-slate-200 dark:bg-slate-950 text-slate-800 dark:text-slate-200 py-20 px-6 ${visible ? "reveal-visible" : ""}`}
     >
       <div className="max-w-2xl mx-auto flex flex-col items-center text-center">
-        <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">{t.title}</h2>
-        <p className="text-slate-400 mb-8 text-sm sm:text-base leading-relaxed">{t.description}</p>
+        <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-3">{t.title}</h2>
+        <p className="text-slate-600 dark:text-slate-400 mb-8 text-sm sm:text-base leading-relaxed">{t.description}</p>
         <div className="flex gap-4 flex-wrap justify-center">
           {contactLinks.map((link) => (
             <Link
@@ -43,9 +43,9 @@ export default function Contact({ t }) {
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center gap-2 px-5 py-3 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700/50 hover:border-indigo-500/50 text-slate-200 hover:text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/10"
+              className="group flex items-center gap-2 px-5 py-3 rounded-xl bg-white dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-700/80 border border-slate-300 dark:border-slate-700/50 hover:border-indigo-500/50 text-slate-800 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/10"
             >
-              <link.icon size={22} className="text-slate-400 group-hover:text-indigo-400 transition-colors" />
+              <link.icon size={22} className="text-slate-600 dark:text-slate-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors" />
               <span className="font-medium text-sm sm:text-base">{link.name}</span>
             </Link>
           ))}

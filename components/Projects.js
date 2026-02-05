@@ -64,7 +64,7 @@ const projects = [
     image: linkbrief,
     technologies: ["Next.js", "Tailwind CSS", "Supabase"],
     url: "https://linkbrief.vercel.app/",
-    status: "online",  
+    status: "paused",  
   },
   {
     title: "SubGhost - Detector de Suscripciones",
@@ -146,9 +146,9 @@ export default function Projects({ t, locale }) {
                 </div>
                 <div className="flex items-center justify-between mt-auto pt-4 border-t border-slate-100 dark:border-slate-700">
                   <div className="flex items-center gap-2">
-                    <span className={`w-2.5 h-2.5 rounded-full ${project.status === 'online' ? 'bg-emerald-500' : project.status === 'development' ? 'bg-amber-500' : 'bg-red-500'}`} aria-hidden />
+                    <span className={`w-2.5 h-2.5 rounded-full ${project.status === 'online' ? 'bg-emerald-500' : project.status === 'development' ? 'bg-amber-500' : project.status === 'paused' ? 'bg-amber-500' : 'bg-red-500'}`} aria-hidden />
                     <span className="text-xs text-slate-500 dark:text-slate-400">
-                      {project.status === 'online' ? (locale === "es" ? "En línea" : "Live") : project.status === 'development' ? (locale === "es" ? "En desarrollo" : "In development") : "Offline"}
+                      {project.status === 'online' ? (locale === "es" ? "En línea" : "Live") : project.status === 'development' ? (locale === "es" ? "En desarrollo" : "In development") : project.status === 'paused' ? (locale === "es" ? "Pausado" : "Paused") : "Offline"}
                     </span>
                   </div>
                   <a

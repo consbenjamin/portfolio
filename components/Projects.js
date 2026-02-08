@@ -7,7 +7,7 @@ import vapeclub from "../images/vapeclub.png";
 import chatapp from "../images/chat-app.png";
 import dolaractual from "../images/dolar-actual.png";
 import hassuru from "../images/hassuru.png";
-import linkbrief from "../images/LinkBrief.png";
+import jobtracker from "../images/jobtracker.png";
 import subghost from "../images/subghost.png";
 
 const projects = [
@@ -45,6 +45,17 @@ const projects = [
     status: "online",  
   },
   {
+    title: "Job Tracker",
+    descriptions: {
+      en: "Job search tracker with Kanban, contacts, interactions, tasks and analytics in one place. Light/dark theme, installable PWA.",
+      es: "Seguimiento de búsqueda de empleo con Kanban, contactos, interacciones, tareas y analytics en un solo lugar. Tema claro/oscuro, PWA instalable.",
+    },
+    image: jobtracker,
+    technologies: ["Next.js", "Tailwind CSS", "Prisma", "PWA"],
+    url: "https://job-tracker-tool.vercel.app/",
+    status: "online",
+  },
+  {
     title: "Dolar-Actual",
     descriptions: {
       en: "Website to see the current dollar rate in Argentina and its historical rate using an external API.",
@@ -54,17 +65,6 @@ const projects = [
     technologies: ["Next.js", "Tailwind CSS", "ReCharts", "External API"],
     url: "https://dolar-actual-argentina.vercel.app/",
     status: "online",  
-  },
-  {
-    title: "LinkBrief URL-Shortener",
-    descriptions: {
-      en: "A URL shortener that allows users to create shortened links with analytics to track clicks and traffic sources.",
-      es: "Un acortador de URLs que permite a los usuarios crear enlaces cortos con analíticas para rastrear clics y fuentes de tráfico.",
-    },
-    image: linkbrief,
-    technologies: ["Next.js", "Tailwind CSS", "Supabase"],
-    url: "https://linkbrief.vercel.app/",
-    status: "paused",  
   },
   {
     title: "SubGhost - Detector de Suscripciones",

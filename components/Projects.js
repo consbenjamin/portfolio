@@ -47,11 +47,11 @@ const projects = [
   {
     title: "Job Tracker",
     descriptions: {
-      en: "Job search tracker with Kanban, contacts, interactions, tasks and analytics in one place. Includes web scraping to capture job offers. Light/dark theme, installable PWA.",
-      es: "Seguimiento de búsqueda de empleo con Kanban, contactos, interacciones, tareas y analytics en un solo lugar. Incluye web scraping para capturar ofertas. Tema claro/oscuro, PWA instalable.",
+      en: "Job search tracker with Kanban, contacts, interactions, tasks and analytics in one place. Includes web scraping to capture job offers and a Chrome Web Extension. Light/dark theme, installable PWA.",
+      es: "Seguimiento de búsqueda de empleo con Kanban, contactos, interacciones, tareas y analytics en un solo lugar. Incluye web scraping para capturar ofertas y una Chrome Web Extension. Tema claro/oscuro, PWA instalable.",
     },
     image: jobtracker,
-    technologies: ["Next.js", "Tailwind CSS", "Prisma", "PWA", "Web Scraping"],
+    technologies: ["Next.js", "Tailwind CSS", "Prisma", "PWA", "Web Scraping", "Chrome Extension"],
     url: "https://job-tracker-tool.vercel.app/",
     status: "online",
   },

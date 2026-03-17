@@ -25,8 +25,21 @@ const themeScript = `
 `;
 
 export default function RootLayout({ children }) {
-  const localeCookie = cookies().get("locale")?.value;
-  const lang = localeCookie === "es" || localeCookie === "en" ? localeCookie : "en";
+  let lang = "en";
+
+  try {
+    const cookieStore = cookies();
+    const localeCookie = typeof cookieStore?.get === "function"
+      ? cookieStore.get("locale")
+      : null;
+
+    const value = localeCookie?.value;
+    if (value === "es" || value === "en") {
+      lang = value;
+    }
+  } catch {
+    // Si cookies() falla en runtime, dejamos el idioma por defecto
+  }
 
   return (
     <html lang={lang} className={inter.variable} suppressHydrationWarning>

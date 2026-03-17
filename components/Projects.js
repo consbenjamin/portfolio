@@ -160,12 +160,6 @@ export default function Projects({ t, locale }) {
                   </div>
                   <div className="flex items-center gap-3">
                     <a
-                      href={`/${locale}/projects/${project.slug}`}
-                      className="text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors"
-                    >
-                      {locale === "es" ? "Caso de estudio" : "Case study"}
-                    </a>
-                    <a
                       href={project.url}
                       target="_blank"
                       rel="noopener noreferrer"

@@ -7,7 +7,8 @@ export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
 
-function getBaseUrlFromHeaders(h) {
+async function getBaseUrlFromHeaders() {
+  const h = await headers();
   const host = h.get("x-forwarded-host") ?? h.get("host");
   const proto = h.get("x-forwarded-proto") ?? "https";
   if (!host) return new URL("https://example.com");
@@ -31,11 +32,10 @@ function seoCopy(locale) {
 }
 
 export async function generateMetadata({ params }) {
-  const { locale } = params;
+  const { locale } = await params;
   if (!locales.includes(locale)) return {};
 
-  const h = headers();
-  const baseUrl = getBaseUrlFromHeaders(h);
+  const baseUrl = await getBaseUrlFromHeaders();
   const url = new URL(`/${locale}`, baseUrl);
   const { title, description } = seoCopy(locale);
 
@@ -105,13 +105,13 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function LocaleLayout({ children, params }) {
-  const { locale } = params;
+  const { locale } = await params;
 
   if (!locales.includes(locale)) {
     notFound();
   }
 
-  const baseUrl = getBaseUrlFromHeaders(headers());
+  const baseUrl = await getBaseUrlFromHeaders();
   const personUrl = new URL(`/${locale}`, baseUrl).toString();
 
   const personJsonLd = {

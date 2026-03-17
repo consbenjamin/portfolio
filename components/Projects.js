@@ -12,6 +12,7 @@ import subghost from "../images/subghost.png";
 
 const projects = [
   {
+    slug: "hassuru",
     title: "Hassuru.ar",
     descriptions: {
       en: "Full-stack E-commerce of clothing developed collaboratively for a client with admin dashboard.",
@@ -23,6 +24,7 @@ const projects = [
     status: "online",
   },
   {
+    slug: "vape-club",
     title: "Vape Club E-Commerce",
     descriptions: {
       en: "E-commerce focused on facilitating the sale and purchase of vapes, with user authentication and integration with MercadoPago payment gateway.",
@@ -34,6 +36,7 @@ const projects = [
     status: "online", 
   },
   {
+    slug: "chat-app",
     title: "Chat-App",
     descriptions: {
       en: "A real-time chat system with secure authentication, developed with modern web technologies.",
@@ -45,6 +48,7 @@ const projects = [
     status: "online",  
   },
   {
+    slug: "job-tracker",
     title: "Job Tracker",
     descriptions: {
       en: "Job search tracker with Kanban, contacts, interactions, tasks and analytics in one place. Includes web scraping to capture job offers and a Chrome Web Extension. Light/dark theme, installable PWA.",
@@ -56,6 +60,7 @@ const projects = [
     status: "online",
   },
   {
+    slug: "dolar-actual",
     title: "Dolar-Actual",
     descriptions: {
       en: "Website to see the current dollar rate in Argentina and its historical rate using an external API.",
@@ -67,6 +72,7 @@ const projects = [
     status: "online",  
   },
   {
+    slug: "subghost",
     title: "SubGhost - Detector de Suscripciones",
     descriptions: {
       en: "Smart dashboard to monitor recurring subscriptions, forecast upcoming charges, and receive reminders so nothing renews unnoticed.",
@@ -105,7 +111,7 @@ export default function Projects({ t, locale }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl font-bold text-slate-900 dark:text-white text-center mb-4">{t.title}</h2>
         <p className="text-center text-slate-500 dark:text-slate-400 mb-12 max-w-xl mx-auto">
-          {locale === "es" ? "Algunos de los proyectos en los que he trabajado" : "Some of the projects I've worked on"}
+          {t.intro ?? (locale === "es" ? "Algunos de los proyectos en los que he trabajado" : "Some of the projects I've worked on")}
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
@@ -116,9 +122,10 @@ export default function Projects({ t, locale }) {
               <div className="relative overflow-hidden">
                 <Image
                   src={project.image || "/placeholder.svg"}
-                  alt={project.title}
+                  alt={`${project.title} — ${project.technologies.slice(0, 4).join(", ")}`}
                   width={400}
                   height={300}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <a
@@ -151,14 +158,26 @@ export default function Projects({ t, locale }) {
                       {project.status === 'online' ? (locale === "es" ? "En línea" : "Live") : project.status === 'development' ? (locale === "es" ? "En desarrollo" : "In development") : project.status === 'paused' ? (locale === "es" ? "Pausado" : "Paused") : "Offline"}
                     </span>
                   </div>
-                  <a
-                    href={project.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 inline-flex items-center gap-1 transition-colors"
-                  >
-                    <ExternalLink size={16} />
-                  </a>
+                  <div className="flex items-center gap-3">
+                    <a
+                      href={`/${locale}/projects/${project.slug}`}
+                      className="text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors"
+                    >
+                      {locale === "es" ? "Caso de estudio" : "Case study"}
+                    </a>
+                    <a
+                      href={project.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 inline-flex items-center gap-1 transition-colors"
+                      aria-label={locale === "es" ? `Abrir ${project.title}` : `Open ${project.title}`}
+                    >
+                      <ExternalLink size={16} />
+                      <span className="sr-only sm:not-sr-only">
+                        {locale === "es" ? "Abrir" : "Open"}
+                      </span>
+                    </a>
+                  </div>
                 </div>
               </div>
             </article>

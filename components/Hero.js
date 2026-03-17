@@ -58,6 +58,11 @@ export default function Hero({ t, locale }) {
           <p className="text-lg sm:text-xl md:text-2xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
             {t.subtitle}
           </p>
+          {t.seoLine && (
+            <p className="mt-3 text-sm sm:text-base text-slate-500 dark:text-slate-500 max-w-2xl mx-auto">
+              {t.seoLine}
+            </p>
+          )}
         </div>
 
         {/* Terminal */}

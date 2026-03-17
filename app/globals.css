@@ -39,6 +39,20 @@ html {
   scroll-behavior: smooth;
 }
 
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee {
+  animation: marquee 28s linear infinite;
+  will-change: transform;
+}
+
 /* Reveal al scroll */
 .reveal {
   opacity: 0;

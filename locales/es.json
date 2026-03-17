@@ -8,6 +8,7 @@
   "hero": {
     "title": "Desarrollador Full-Stack",
     "subtitle": "Transformando problemas complejos en soluciones elegantes",
+    "seoLine": "Desarrollador Full‑Stack de Argentina (LatAm) con foco en Next.js, React y Node.js.",
     "viewProjects": "Ver Proyectos",
     "downloadCV": "Descargar CV"
   },
@@ -22,6 +23,7 @@
   },
   "projects": {
     "title": "Proyectos",
+    "intro": "Selección de trabajos full‑stack (e‑commerce, dashboards e integraciones).",
     "description1": "E-commerce enfocado en facilitar la venta y compra de vapes, con autenticación de usuarios e integración con el gateway de pagos MercadoPago.",
     "description2": "Un sistema de chat en tiempo real con autenticación segura, desarrollado con tecnologías web modernas.",
     "description3": "Sitio web para ver el tipo de cambio actual del dólar en Argentina y su historial utilizando una API externa"

@@ -1,5 +1,6 @@
 import { Inter } from "next/font/google";
 import { Analytics } from '@vercel/analytics/next';
+import { cookies } from "next/headers";
 import "./globals.css";
 
 const inter = Inter({
@@ -24,8 +25,11 @@ const themeScript = `
 `;
 
 export default function RootLayout({ children }) {
+  const localeCookie = cookies().get("locale")?.value;
+  const lang = localeCookie === "es" || localeCookie === "en" ? localeCookie : "en";
+
   return (
-    <html lang="es" className={inter.variable} suppressHydrationWarning>
+    <html lang={lang} className={inter.variable} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>

@@ -11,18 +11,14 @@
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 248, 250, 252;
-    --background-start-rgb: 15, 23, 42;
-    --background-end-rgb: 30, 41, 59;
-    --accent: 129, 140, 248;
-    --accent-glow: 165, 180, 252;
-  }
-}
+/* Una sola estrategia de tema: la clase .dark, igual que Tailwind
+   (darkMode: ["class"]). El script de app/layout.js ya la aplica desde
+   prefers-color-scheme cuando el usuario todavia no eligio.
 
-html.dark,
-html[data-theme='dark'] {
+   Antes habia ademas un bloque @media (prefers-color-scheme: dark) que
+   pisaba estas variables: con el SO en oscuro y el toggle en claro, el
+   body quedaba oscuro mientras el resto del sitio se veia claro. */
+html.dark {
   --foreground-rgb: 248, 250, 252;
   --background-start-rgb: 15, 23, 42;
   --background-end-rgb: 30, 41, 59;

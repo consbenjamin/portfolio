@@ -16,6 +16,7 @@ export default {
       fontFamily: {
         sans: ["var(--font-outfit)", "system-ui", "sans-serif"],
         display: ["var(--font-outfit)", "system-ui", "sans-serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
       },
       animation: {
         "fade-in-up": "fadeInUp 0.6s ease-out forwards",

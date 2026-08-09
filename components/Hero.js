@@ -1,40 +1,82 @@
 'use client';
 
 import { useState, useEffect } from "react";
+import { ArrowRight, Download } from "lucide-react";
+
+const KW = "text-indigo-600 dark:text-indigo-400";
+const IDENT = "text-slate-900 dark:text-slate-100";
+const KEY = "text-slate-700 dark:text-slate-300";
+const PUNCT = "text-slate-500 dark:text-slate-400";
+const STR = "text-emerald-700 dark:text-emerald-400";
+
+const CODE = [
+  { text: "const", cls: KW },
+  { text: " developer ", cls: IDENT },
+  { text: "= {", cls: PUNCT },
+  { text: "\n  ", cls: PUNCT },
+  { text: "name", cls: KEY },
+  { text: ": ", cls: PUNCT },
+  { text: '"Constantino Abba"', cls: STR },
+  { text: ",\n  ", cls: PUNCT },
+  { text: "role", cls: KEY },
+  { text: ": ", cls: PUNCT },
+  { text: '"Full-Stack Developer"', cls: STR },
+  { text: ",\n  ", cls: PUNCT },
+  { text: "passion", cls: KEY },
+  { text: ": [", cls: PUNCT },
+  { text: '"JavaScript"', cls: STR },
+  { text: ", ", cls: PUNCT },
+  { text: '"UX/UI"', cls: STR },
+  { text: ", ", cls: PUNCT },
+  { text: '"Automation"', cls: STR },
+  { text: "],\n};", cls: PUNCT },
+];
+
+const FULL_CODE = CODE.map((token) => token.text).join("");
 
 export default function Hero({ t, locale }) {
-  const [text, setText] = useState("");
-  const [isTyping, setIsTyping] = useState(true);
-  const [hasTyped, setHasTyped] = useState(false);
-
-  const fullText = `  const developer = {
-      name: "Constantino Abba",
-      role: "Full-Stack Developer",
-      passion: ["JavaScript", "UX/UI", "Automation"],
-    };`;
+  const [typed, setTyped] = useState(0);
+  const [done, setDone] = useState(false);
 
   useEffect(() => {
-    if (!hasTyped) {
-      if (isTyping) {
-        if (text.length < fullText.length) {
-          const timeout = setTimeout(() => {
-            setText(fullText.slice(0, text.length + 1));
-          }, 25);
-          return () => clearTimeout(timeout);
-        } else {
-          setIsTyping(false);
-          setHasTyped(true);
-        }
-      }
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setTyped(FULL_CODE.length);
+      setDone(true);
+      return;
     }
-  }, [text, isTyping, hasTyped]);
+    // One character per tick keeps the effect on transform-free text only;
+    // the panel height is reserved below, so nothing reflows while it runs.
+    const id = setInterval(() => {
+      setTyped((n) => {
+        if (n >= FULL_CODE.length) {
+          clearInterval(id);
+          setDone(true);
+          return n;
+        }
+        return n + 1;
+      });
+    }, 22);
+    return () => clearInterval(id);
+  }, []);
 
   const cvLink = locale === 'es' ? '/constantino_abba_cv_es.pdf' : '/constantino_abba_cv_en.pdf';
+
+  let offset = 0;
+  const painted = CODE.map((token, index) => {
+    const start = offset;
+    offset += token.text.length;
+    if (typed <= start) return null;
+    return (
+      <span key={index} className={token.cls}>
+        {token.text.slice(0, typed - start)}
+      </span>
+    );
+  });
 
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center text-slate-900 dark:text-white overflow-hidden px-4"
+      className="relative min-h-[100dvh] flex items-center text-slate-900 dark:text-white overflow-hidden px-4 sm:px-6 lg:px-8 pt-24 pb-16"
     >
       {/* Gradiente de fondo */}
       <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-indigo-50/30 to-slate-100 dark:from-slate-950 dark:via-indigo-950/20 dark:to-slate-900" />
@@ -47,57 +89,69 @@ export default function Hero({ t, locale }) {
         }}
       />
 
-      <div className="relative z-10 text-center max-w-3xl w-full">
-        <div className="mb-8 animate-fade-in-up">
-          <p className="text-sm font-medium text-indigo-600 dark:text-indigo-400 uppercase tracking-wider mb-3 opacity-0 animate-fade-in" style={{ animationDelay: "0.2s", animationFillMode: "forwards" }}>
+      <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+        <div className="lg:col-span-6 text-center lg:text-left">
+          <p
+            className="text-sm font-medium text-indigo-600 dark:text-indigo-400 uppercase tracking-wider mb-3 opacity-0 animate-fade-in"
+            style={{ animationDelay: "0.15s", animationFillMode: "forwards" }}
+          >
             {locale === "es" ? "Hola, soy" : "Hi, I'm"}
           </p>
-          <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 text-slate-900 dark:text-white tracking-tight">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-5 text-slate-900 dark:text-white tracking-tight leading-[1.05] text-balance animate-fade-in-up">
             {t.title}
           </h1>
-          <p className="text-lg sm:text-xl md:text-2xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+          <p
+            className="text-lg sm:text-xl text-slate-600 dark:text-slate-400 max-w-[46ch] mx-auto lg:mx-0 leading-relaxed animate-fade-in-up"
+            style={{ animationDelay: "0.1s", animationFillMode: "backwards" }}
+          >
             {t.subtitle}
           </p>
-          {t.seoLine && (
-            <p className="mt-3 text-sm sm:text-base text-slate-500 dark:text-slate-500 max-w-2xl mx-auto">
-              {t.seoLine}
-            </p>
-          )}
-        </div>
 
-        {/* Terminal */}
-        <div className="bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm p-4 sm:p-5 rounded-xl shadow-xl border border-slate-200/50 dark:border-slate-700/50 max-w-full sm:max-w-3xl mx-auto text-left animate-fade-in-up" style={{ animationDelay: "0.15s", animationFillMode: "backwards" }}>
-          <div className="flex items-center gap-2 mb-3">
-            <span className="w-3 h-3 rounded-full bg-red-400" />
-            <span className="w-3 h-3 rounded-full bg-amber-400" />
-            <span className="w-3 h-3 rounded-full bg-emerald-400" />
-          </div>
-          <div className="font-mono text-slate-800 dark:text-slate-200 text-sm sm:text-base break-words whitespace-pre-wrap">
-            <span className="text-emerald-600 dark:text-emerald-400">$ </span>
-            {text}
-            <span
-              className={`inline-block w-2 h-4 ml-0.5 align-middle bg-current ${
-                isTyping ? "animate-pulse" : ""
-              }`}
-              aria-hidden
-            />
+          <div
+            className="mt-9 flex flex-col sm:flex-row justify-center lg:justify-start items-stretch sm:items-center gap-3 animate-fade-in-up"
+            style={{ animationDelay: "0.2s", animationFillMode: "backwards" }}
+          >
+            <a
+              href="#projects"
+              className="group inline-flex items-center justify-center gap-2 whitespace-nowrap bg-indigo-600 text-white px-6 py-3.5 text-base font-semibold rounded-xl hover:bg-indigo-500 shadow-lg shadow-indigo-600/25 hover:shadow-indigo-600/40 hover:-translate-y-0.5 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-950 transition-all duration-300"
+            >
+              {t.viewProjects}
+              <ArrowRight size={18} className="transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden />
+            </a>
+            <a
+              href={cvLink}
+              download="Constantino-Abba-CV.pdf"
+              className="inline-flex items-center justify-center gap-2 whitespace-nowrap border border-slate-300 dark:border-slate-700 bg-white/70 dark:bg-slate-900/50 text-slate-800 dark:text-slate-200 px-6 py-3.5 text-base font-semibold rounded-xl hover:border-indigo-400 dark:hover:border-indigo-500 hover:text-indigo-700 dark:hover:text-indigo-300 hover:-translate-y-0.5 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-950 transition-all duration-300"
+            >
+              <Download size={18} aria-hidden />
+              {t.downloadCV}
+            </a>
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col sm:flex-row justify-center items-center gap-4 animate-fade-in-up" style={{ animationDelay: "0.3s", animationFillMode: "backwards" }}>
-          <a
-            href="#projects"
-            className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-indigo-600 text-white px-6 py-3.5 text-base font-semibold rounded-xl hover:bg-indigo-500 shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-slate-900 transition-all duration-300"
-          >
-            {t.viewProjects}
-          </a>
-          <a
-            href={cvLink}
-            download="Constantino-Abba-CV.pdf"
-            className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-transparent border-2 border-indigo-600 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400 px-6 py-3.5 text-base font-semibold rounded-xl hover:bg-indigo-600 hover:text-white dark:hover:bg-indigo-400 dark:hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-slate-900 transition-all duration-300"
-          >
-            {t.downloadCV}
-          </a>
+        <div
+          className="lg:col-span-6 animate-fade-in-up"
+          style={{ animationDelay: "0.15s", animationFillMode: "backwards" }}
+        >
+          <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xl shadow-slate-900/5 dark:shadow-black/40 overflow-hidden">
+            <div className="flex items-center justify-between px-4 py-2.5 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/60">
+              <span className="font-mono text-xs text-slate-500 dark:text-slate-400">developer.js</span>
+              <span className="font-mono text-xs text-slate-400 dark:text-slate-500">JavaScript</span>
+            </div>
+            {/* La copia invisible reserva el alto final: el bloque no crece mientras tipea. */}
+            <div className="grid p-4 sm:p-6 font-mono text-[13px] sm:text-sm leading-relaxed">
+              <pre className="col-start-1 row-start-1 invisible whitespace-pre-wrap break-words" aria-hidden>
+                {FULL_CODE}
+              </pre>
+              <pre className="col-start-1 row-start-1 whitespace-pre-wrap break-words">
+                {painted}
+                <span
+                  className={`inline-block w-[2px] h-[1.1em] ml-px align-text-bottom bg-indigo-500 ${done ? "opacity-0" : "animate-pulse"}`}
+                  aria-hidden
+                />
+              </pre>
+            </div>
+          </div>
         </div>
       </div>
     </section>

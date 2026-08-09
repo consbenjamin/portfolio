@@ -39,12 +39,14 @@ html {
   scroll-behavior: smooth;
 }
 
+/* La pista se duplica: el desplazamiento es la mitad del ancho MENOS medio gap,
+   si no queda un salto de 8px al reiniciar el loop. */
 @keyframes marquee {
   0% {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translateX(calc(-50% - 0.5rem));
   }
 }
 
@@ -74,4 +76,36 @@ html {
 ::selection {
   background: rgba(var(--accent), 0.25);
   color: inherit;
+}
+
+/* Sin JS el reveal quedaría invisible para siempre. */
+@media (scripting: none) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .marquee {
+    animation: none;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

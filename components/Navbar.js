@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Menu, X } from "lucide-react";
 import DarkModeToggle from "./DarkModeToggle";
 import { usePathname } from "next/navigation";
@@ -17,10 +17,17 @@ export default function Navbar({ t, locale, activeSection = "hero" }) {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
 
+  const topSentinel = useRef(null);
+
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const el = topSentinel.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setScrolled(!entry.isIntersecting),
+      { threshold: 0 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -50,6 +57,9 @@ export default function Navbar({ t, locale, activeSection = "hero" }) {
     }`;
 
   return (
+    <>
+      {/* Centinela de 20px: reemplaza al listener de scroll para el estado "scrolled". */}
+      <div ref={topSentinel} aria-hidden className="h-5 -mb-5 w-px pointer-events-none" />
     <nav
       className={`sticky top-0 z-40 transition-all duration-300 ${
         scrolled
@@ -71,6 +81,7 @@ export default function Navbar({ t, locale, activeSection = "hero" }) {
                 <a
                   key={id}
                   href={href}
+                  aria-current={activeSection === id ? "true" : undefined}
                   className={linkClass(id)}
                   onClick={id !== "hero" ? closeMenu : undefined}
                 >
@@ -170,5 +181,6 @@ export default function Navbar({ t, locale, activeSection = "hero" }) {
         </div>
       )}
     </nav>
+    </>
   );
 }

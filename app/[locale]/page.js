@@ -23,25 +23,38 @@ export default function Home() {
 
   const [showButton, setShowButton] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
-  const sectionRefs = useRef({});
+  const topSentinel = useRef(null);
+
+  // La sección activa es la que cruza el centro del viewport.
+  useEffect(() => {
+    const seen = new Map();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          seen.set(entry.target.id, entry.isIntersecting);
+        }
+        const active = SECTION_IDS.find((id) => seen.get(id));
+        if (active) setActiveSection(active);
+      },
+      { rootMargin: "-45% 0px -45% 0px", threshold: 0 }
+    );
+
+    for (const id of SECTION_IDS) {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    }
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setShowButton(window.scrollY > 400);
-      const scrollY = window.scrollY + 120;
-      for (let i = SECTION_IDS.length - 1; i >= 0; i--) {
-        const id = SECTION_IDS[i];
-        const el = document.getElementById(id);
-        if (el && el.offsetTop <= scrollY) {
-          setActiveSection(id);
-          break;
-        }
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
+    const el = topSentinel.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setShowButton(!entry.isIntersecting),
+      { threshold: 0 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
 
   const scrollToTop = () => {
@@ -49,7 +62,8 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-slate-50 dark:bg-slate-900">
+    <main className="relative min-h-[100dvh] bg-slate-50 dark:bg-slate-900">
+      <div ref={topSentinel} aria-hidden className="absolute top-0 h-[400px] w-px pointer-events-none" />
       <Navbar t={translations.navbar} locale={locale} activeSection={activeSection} />
       <Hero t={translations.hero} locale={locale} />
       <About t={translations.about} />
@@ -61,8 +75,8 @@ export default function Home() {
       {showButton && (
         <button
           onClick={scrollToTop}
-          aria-label="Volver arriba"
-          className="fixed bottom-6 right-6 z-50 p-3 rounded-full bg-indigo-600 text-white shadow-lg shadow-indigo-500/30 hover:bg-indigo-500 hover:shadow-indigo-500/40 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2 dark:focus:ring-offset-slate-900 transition-all duration-300"
+          aria-label={locale === "es" ? "Volver arriba" : "Back to top"}
+          className="fixed bottom-6 right-6 z-50 p-3 rounded-full bg-indigo-600 text-white shadow-lg shadow-indigo-600/30 hover:bg-indigo-500 hover:shadow-indigo-600/40 hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900 transition-all duration-300"
         >
           <ArrowUp size={22} strokeWidth={2.5} />
         </button>

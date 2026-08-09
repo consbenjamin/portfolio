@@ -110,12 +110,12 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
-  const { locale, slug } = params;
+  const { locale, slug } = await params;
   if (!locales.includes(locale)) return {};
   const project = PROJECTS.find((p) => p.slug === slug);
   if (!project) return {};
 
-  const baseUrl = getBaseUrlFromHeaders(headers());
+  const baseUrl = getBaseUrlFromHeaders(await headers());
   const url = new URL(`/${locale}/projects/${slug}`, baseUrl);
   const title =
     locale === "es"
@@ -157,7 +157,7 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function ProjectCaseStudyPage({ params }) {
-  const { locale, slug } = params;
+  const { locale, slug } = await params;
   if (!locales.includes(locale)) notFound();
 
   const project = PROJECTS.find((p) => p.slug === slug);

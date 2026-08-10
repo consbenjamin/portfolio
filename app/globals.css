@@ -83,9 +83,8 @@ html {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
+  /* No se toca scroll-behavior: dejarlo en auto hacia que los links del
+     menu saltaran de golpe en vez de desplazarse. */
 
   /* El marquee no se detiene, solo va mas lento (28s -> 90s, de 63 a
      20px/s). A 180s el movimiento no se percibia y parecia congelado.

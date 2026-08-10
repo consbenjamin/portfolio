@@ -58,7 +58,38 @@ export default function Home() {
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    // Con movimiento reducido el navegador ignora el scroll suave nativo y
+    // salta de golpe, asi que se anima a mano. Los pasos usan "instant"
+    // porque html tiene scroll-behavior: smooth y si no se pisarian entre si.
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    const desde = window.scrollY;
+    if (desde === 0) return;
+
+    const inicio = performance.now();
+    const duracion = 500;
+    let cancelado = false;
+    const cancelar = () => { cancelado = true; };
+    // si el usuario scrollea, no le peleamos el control
+    window.addEventListener("wheel", cancelar, { passive: true, once: true });
+    window.addEventListener("touchstart", cancelar, { passive: true, once: true });
+
+    const paso = (ahora) => {
+      if (cancelado) return;
+      const t = Math.min(1, (ahora - inicio) / duracion);
+      const suave = 1 - Math.pow(1 - t, 3);
+      window.scrollTo({ top: Math.round(desde * (1 - suave)), behavior: "instant" });
+      if (t < 1) {
+        requestAnimationFrame(paso);
+      } else {
+        window.removeEventListener("wheel", cancelar);
+        window.removeEventListener("touchstart", cancelar);
+      }
+    };
+    requestAnimationFrame(paso);
   };
 
   return (

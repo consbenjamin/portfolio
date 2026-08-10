@@ -46,7 +46,9 @@ export default function Hero({ t, locale }) {
   const [done, setDone] = useState(true);
 
   useBeforePaint(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    // Con movimiento reducido igual tipea, pero termina en ~1,5s en vez de
+    // ~4s: se acorta la animacion en lugar de eliminarla.
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     setTyped(0);
     setDone(false);
@@ -61,7 +63,7 @@ export default function Hero({ t, locale }) {
         }
         return n + 1;
       });
-    }, 22);
+    }, reduce ? 8 : 22);
     return () => clearInterval(id);
   }, []);
 

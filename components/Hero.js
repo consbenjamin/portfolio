@@ -1,7 +1,11 @@
 'use client';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import { ArrowRight, Download } from "lucide-react";
+
+// useLayoutEffect corre antes del pintado, asi el rebobinado del tipeo no
+// alcanza a verse. En el servidor no existe, se cae a useEffect.
+const useBeforePaint = typeof window === "undefined" ? useEffect : useLayoutEffect;
 
 const KW = "text-indigo-600 dark:text-indigo-400";
 const IDENT = "text-slate-900 dark:text-slate-100";
@@ -35,15 +39,17 @@ const CODE = [
 const FULL_CODE = CODE.map((token) => token.text).join("");
 
 export default function Hero({ t, locale }) {
-  const [typed, setTyped] = useState(0);
-  const [done, setDone] = useState(false);
+  // Arranca completo: es lo que renderiza el servidor, asi el bloque nunca
+  // queda vacio si el JS no llega a correr. Si puede animar, se rebobina
+  // antes del primer pintado y tipea.
+  const [typed, setTyped] = useState(FULL_CODE.length);
+  const [done, setDone] = useState(true);
 
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setTyped(FULL_CODE.length);
-      setDone(true);
-      return;
-    }
+  useBeforePaint(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    setTyped(0);
+    setDone(false);
     // One character per tick keeps the effect on transform-free text only;
     // the panel height is reserved below, so nothing reflows while it runs.
     const id = setInterval(() => {

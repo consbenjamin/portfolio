@@ -87,12 +87,13 @@ html {
     scroll-behavior: auto;
   }
 
-  /* El marquee no se detiene, solo baja a un desplazamiento muy lento
-     (28s -> 180s, unos 10px por segundo). Necesita !important y mayor
-     especificidad que la regla universal de abajo, que si no lo cortaria
-     con animation-duration 0.01ms y iteration-count 1. */
+  /* El marquee no se detiene, solo va mas lento (28s -> 90s, de 63 a
+     20px/s). A 180s el movimiento no se percibia y parecia congelado.
+     Necesita !important y mayor especificidad que la regla universal de
+     abajo, que si no lo cortaria con animation-duration 0.01ms y
+     animation-iteration-count 1. */
   .marquee {
-    animation-duration: 180s !important;
+    animation-duration: 90s !important;
     animation-iteration-count: infinite !important;
   }
 

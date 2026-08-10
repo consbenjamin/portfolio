@@ -87,8 +87,20 @@ html {
     scroll-behavior: auto;
   }
 
+  /* Sin animacion la pista queda quieta, y como el contenedor recorta,
+     las ultimas tecnologias quedaban inalcanzables. Se oculta la copia
+     duplicada (que solo existe para el loop) y se permite scrollear. */
   .marquee {
     animation: none;
+    will-change: auto;
+  }
+
+  .marquee > [aria-hidden="true"] {
+    display: none;
+  }
+
+  .marquee-viewport {
+    overflow-x: auto;
   }
 
   .reveal {

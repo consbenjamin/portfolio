@@ -11,6 +11,7 @@ import Projects from "@/components/Projects";
 import Footer from "@/components/Footer";
 import Carousel from "@/components/Carousel";
 import Contact from "@/components/Contact";
+import { animateScrollTo, interceptAnchorScroll, prefersReducedMotion } from "@/lib/smooth-scroll";
 
 import en from "../../locales/en.json";
 import es from "../../locales/es.json";
@@ -57,39 +58,16 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
 
+  // Los links del menu (#about, #projects...) tienen el mismo problema que el
+  // boton: con movimiento reducido el navegador los hace saltar de golpe.
+  useEffect(() => interceptAnchorScroll(), []);
+
   const scrollToTop = () => {
-    // Con movimiento reducido el navegador ignora el scroll suave nativo y
-    // salta de golpe, asi que se anima a mano. Los pasos usan "instant"
-    // porque html tiene scroll-behavior: smooth y si no se pisarian entre si.
-    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+    if (prefersReducedMotion()) {
+      animateScrollTo(0);
       return;
     }
-
-    const desde = window.scrollY;
-    if (desde === 0) return;
-
-    const inicio = performance.now();
-    const duracion = 500;
-    let cancelado = false;
-    const cancelar = () => { cancelado = true; };
-    // si el usuario scrollea, no le peleamos el control
-    window.addEventListener("wheel", cancelar, { passive: true, once: true });
-    window.addEventListener("touchstart", cancelar, { passive: true, once: true });
-
-    const paso = (ahora) => {
-      if (cancelado) return;
-      const t = Math.min(1, (ahora - inicio) / duracion);
-      const suave = 1 - Math.pow(1 - t, 3);
-      window.scrollTo({ top: Math.round(desde * (1 - suave)), behavior: "instant" });
-      if (t < 1) {
-        requestAnimationFrame(paso);
-      } else {
-        window.removeEventListener("wheel", cancelar);
-        window.removeEventListener("touchstart", cancelar);
-      }
-    };
-    requestAnimationFrame(paso);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (

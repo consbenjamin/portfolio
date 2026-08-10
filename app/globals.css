@@ -63,10 +63,6 @@ html {
   transform: translateY(0);
 }
 
-.reveal-delay-1 { transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.2s; }
-.reveal-delay-3 { transition-delay: 0.3s; }
-.reveal-delay-4 { transition-delay: 0.4s; }
 
 /* Selección de texto con acento */
 ::selection {
@@ -108,5 +104,10 @@ html {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    /* Sin esto los delays quedan vivos: el hero usa fill-mode backwards con
+       retardos de hasta 0.2s, asi que sus elementos se quedaban invisibles
+       ese rato y despues aparecian de golpe. */
+    animation-delay: 0s !important;
+    transition-delay: 0s !important;
   }
 }

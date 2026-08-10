@@ -92,10 +92,14 @@ html {
     animation-iteration-count: infinite !important;
   }
 
+  /* Las secciones siguen apareciendo al scrollear, con menos recorrido
+     (24px -> 8px) y mas corto (0.6s -> 0.4s). El !important y la
+     especificidad son para ganarle a la regla universal de abajo; el estado
+     visible lo sigue resolviendo .reveal.reveal-visible, que es mas
+     especifico que este selector. */
   .reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
+    transform: translateY(8px);
+    transition-duration: 0.4s !important;
   }
 
   *,

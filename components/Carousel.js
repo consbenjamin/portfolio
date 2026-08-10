@@ -26,7 +26,7 @@ export default function Carousel({ t }) {
           {t.title}
         </h2>
       </div>
-      <div className="marquee-viewport group overflow-hidden">
+      <div className="group overflow-hidden">
         <ul className="flex gap-4 w-max marquee group-hover:[animation-play-state:paused] [animation-play-state:running]">
           {[...skills, ...skills].map((skill, index) => (
             <li
